@@ -1,8 +1,10 @@
 PHP_EXEC := docker-compose exec -T php
-TARGET := alma-test-technique
+PHP_TARGET := alma-test-technique_php
+NGINX_TARGET := alma-test-technique_nginx
  
 build:
-	docker build -t $(TARGET) .
+	docker build -t $(PHP_TARGET) -f infra/php/Dockerfile .
+	docker build -t $(NGINX_TARGET) -f infra/nginx/Dockerfile .
 
 init:
 	cp .env.dist .env
@@ -17,4 +19,4 @@ database:
 	$(PHP_EXEC) bin/console doctrine:schema:update
 
 stop:
-	docker-compose down --volumes
+	docker-compose down --volumes --remove-orphans

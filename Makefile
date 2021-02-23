@@ -4,6 +4,9 @@ TARGET := alma-test-technique
 build:
 	docker build -t $(TARGET) .
 
+init:
+	cp .env.dist .env
+
 start:
 	docker-compose up -d
  
@@ -12,14 +15,6 @@ composer:
  
 database:
 	$(PHP_EXEC) bin/console doctrine:schema:update
- 
-test: unit-test functional-test
-
-unit-test:
-	$(PHP_EXEC) bin/phpunit
-
-functional-test:
-	$(PHP_EXEC) bin/phpunit
 
 stop:
 	docker-compose down --volumes

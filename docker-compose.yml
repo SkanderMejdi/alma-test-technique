@@ -1,0 +1,26 @@
+version:  '3.8'
+services:
+  mysql:
+    image: mysql:8.0.22
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: alma-test-technique
+
+  php:
+    image: alma-test-technique
+    depends_on:
+      - "mysql"
+    volumes:
+      - './:/var/www'
+    env_file:
+      - .env
+
+  nginx:
+    image: nginx:1.19.6-alpine
+    depends_on:
+      - "mysql"
+      - "php"
+    volumes:
+      - './nginx/nginx.conf:/etc/nginx/nginx.conf'
+    ports:
+      - '80:80'

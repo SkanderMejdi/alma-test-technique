@@ -2,8 +2,6 @@ version:  '3.8'
 services:
   php:
     image: alma-test-technique_php
-    depends_on:
-      - "mysql"
     volumes:
       - './:/var/www'
     env_file:
@@ -12,7 +10,6 @@ services:
   nginx:
     image: alma-test-technique_nginx
     depends_on:
-      - "mysql"
       - "php"
       - "react-watcher"
     volumes:

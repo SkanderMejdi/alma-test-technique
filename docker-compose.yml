@@ -1,11 +1,5 @@
 version:  '3.8'
 services:
-  mysql:
-    image: mysql:8.0.22
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: alma-test-technique
-
   php:
     image: alma-test-technique_php
     depends_on:
